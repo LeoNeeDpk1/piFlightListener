@@ -10,9 +10,7 @@ while True:
         prev_data = data
         try:
             key = bindings[data[8:]]
-            print(key)
             try:
-                print('python.exe', 'D:\Code\keysender\keypress.py', key)
                 subprocess.Popen(['python.exe', 'D:\Code\keysender\keypress.py', key], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             except:
                 print("Something wrong with keypress emulate...")

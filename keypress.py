@@ -55,27 +55,11 @@ def pressing(key):
     time.sleep(0.1)
     for l in key:
         ReleaseKey(l)
-    
-    
-    
-    '''#PressKey(0x12)
-    PressKey(key)
-    time.sleep(0.1)
-    #ReleaseKey(0x12)
-    ReleaseKey(key)'''
     # you can change 0x30 to any key you want. For more info look at :
     # msdn.microsoft.com/en-us/library/dd375731
 inputdata = str(sys.argv[1]).split('_')
-print(inputdata)
 keys = []
 for item in inputdata:
-    if item == 'SHIFT':
-        keys.append(16)
-    elif item == 'CTRL':
-        keys.append(17)
-    elif item == 'ALT':
-        keys.append(18)
-    else:
-        keys.append(int(item))
+    keys.append(int(item))
         
 pressing(keys)
