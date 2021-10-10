@@ -61,5 +61,5 @@ inputdata = str(sys.argv[1]).split('_')
 keys = []
 for item in inputdata:
     keys.append(int(item))
-        
+    
 pressing(keys)

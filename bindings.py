@@ -12,18 +12,20 @@
 #10 Taxi lights
 #11 Landing lights
 #12 Pitot heat
-#13 AP button
-#14 APPR button
+#13B AP button
+#14B APPR button
 #15 Landing gear
+#19B Flaps up button
+#20B Flaps down button
 #T+\- Thrust UP\DOWN
 #M+\- Mixture UP\DOWN
 #P+\- Propeller UP\DOWN
 #A+\- Altitude UP\DOWN
-#AB Altitude AP button
+#AB Altitude AP button -----
 #H+\- Heading UP\DOWN
-#HB Heading AP button
+#HB Heading AP button ------
 #V+\- VS UP\DOWN
-#VB - VS AP button
+#VB - VS AP button -----
 #N+\- Nav freq UP\DOWN
 #NB ...
 #C+\- Com freq UP\DOWN
@@ -45,6 +47,8 @@ keys = {
 'UARR': '38',
 'RARR': '39',
 'DARR': '40',
+'INS': '45',
+'DEL': '46',
 '0': '48',
 '1': '49',
 '2': '50',
@@ -91,11 +95,11 @@ keys = {
 'NUM7': '103',
 'NUM8': '104',
 'NUM9': '105',
-'*': '106',
-'+': '107',
-'|': '108',
-'-': '109',
-'.': '110',
+'MULT': '106',
+'ADD': '107',
+'SEP': '108',
+'SUBTR': '109',
+'DEC': '110',
 'DIV': '111',
 'F1': '112',
 'F2': '113',
@@ -118,8 +122,46 @@ def multikeys(k1, k2, k3):
         return str(keys[k1] + '_' + keys[k2] + '_' + keys[k3])
 
 bindings = {
-'11': keys['B'],
-'10': multikeys('SHIFT', 'B', ''),
-'41': keys['O']
+'10': multikeys('ALT', 'B', ''),
+'11': multikeys('ALT', 'B', ''),
+'40': multikeys('ALT', 'A', ''),
+'41': multikeys('ALT', 'A', ''),
+'50': keys['PGUP'],
+'51': keys['PGUP'],
+'60': multikeys('CTRL', 'DEC', ''),
+'61': multikeys('CTRL', 'DEC', ''),
+'70': multikeys('ALT', 'N', ''),
+'71': multikeys('ALT', 'N', ''),
+'80': multikeys('ALT', 'H', ''),
+'81': multikeys('ALT', 'H', ''),
+'90': keys['O'],
+'91': keys['O'],
+'100': multikeys('ALT', 'J', ''),
+'101': multikeys('ALT', 'J', ''),
+'110': multikeys('CTRL', 'L', ''),
+'111': multikeys('CTRL', 'L', ''),
+'120': multikeys('SHIFT', 'H', ''),
+'121': multikeys('SHIFT', 'H', ''),
+'13B': keys['Z'],
+'14B': multikeys('CTRL','A', ''),
+'150': keys['G'],
+'151': keys['G'],
+'19B': keys['F6'],
+'20B': keys['F7'],
+'T+': keys['F3'],
+'T-': keys['F2'],
+'M+': multikeys('SHIFT', 'CTRL', 'F3'),
+'M-': multikeys('SHIFT', 'CTRL', 'F2'),
+'P+': multikeys('CTRL', 'F3', ''),
+'P-': multikeys('CTRL', 'F2', ''),
+'A+': multikeys('CTRL', 'PGUP', ''),
+'A-': multikeys('CTRL', 'PGDN', ''),
+'H+': multikeys('CTRL', 'INS', ''),
+'H-': multikeys('CTRL', 'DEL', ''),
+'V+': multikeys('CTRL', 'HOME', ''),
+'V-': multikeys('CTRL', 'END', ''),
+'NB': multikeys('SHIFT', 'CTRL', 'N'),
+'N+': multikeys('SHIFT', 'CTRL', 'NAV9'),
+'N-': multikeys('SHIFT', 'CTRL', 'NAV3'),
 }
 
