@@ -1,21 +1,13 @@
-import memcache, time, os, subprocess, bindings
-shared = memcache.Client(['192.168.1.120:11211'], debug=0)
-prev_data = shared.get('input')
+import socket
 
-bindings = bindings.bindings
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+listen_address = ('0.0.0.0', 65000)
+sock.bind(listen_address)
 
 while True:
-    data = shared.get('input')
-    if not prev_data == data:
-        prev_data = data
-        try:
-            key = bindings[data[8:]]
-            try:
-                subprocess.Popen(['python.exe', 'D:\Code\piflightlistener\keypress.py', key], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            except:
-                print("Something wrong with keypress emulate...")
-        except:
-            print("There is no binding for " + data[8:])
-        
-
-    time.sleep(0.01)
+    try:
+        message, address = sock.recvfrom(4096)
+    except:
+        print('Somthing went wrong...')
+    message = str(message)[2:-1]
+    print(message)
