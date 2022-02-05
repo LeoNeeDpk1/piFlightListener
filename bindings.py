@@ -1,55 +1,23 @@
-#1 = ON, 0 = OFF
-#Example: 40 = Alternator off, 81 = Beacon lights on
+# 1 = ON, 0 = OFF, B = Button (state is not needed).
+# Example: 60 = Parking breaks on, 151 = Landing gear up.
+# Check your piFlightBox configuration.
 
-#PINS:
-#1 Master
-#4 Alternator
-#5 Avionics
-#6 Parking break
-#7 Nav lights
-#8 Beacon lights
-#9 Strobe lights
-#10 Taxi lights
-#11 Landing lights
-#12 Pitot heat
-#13B AP button
-#14B APPR button
-#15 Landing gear
-#19B Flaps up button
-#20B Flaps down button
-#A+\- Altitude UP\DOWN
-#AB Altitude AP button
-#H+\- Heading UP\DOWN
-#HB Heading AP button
-#V+\- VS UP\DOWN
-#VB - VS AP button
-#NB AP NAV button
-#B+\- Barometer UP\DOWN
-#BB barometer push button (STD Baro)
 
+# BUTTON : EVENT_ID
 bindings = {
-'10': 'TOGGLE_MASTER_BATTERY',
-'11': 'TOGGLE_MASTER_BATTERY',
-'40': 'TOGGLE_MASTER_ALTERNATOR',
-'41': 'TOGGLE_MASTER_ALTERNATOR',
-'50': 'TOGGLE_AVIONICS_MASTER',
-'51': 'TOGGLE_AVIONICS_MASTER',
+'1B': 'TOGGLE_MASTER_BATTERY',
+'4B': 'TOGGLE_MASTER_ALTERNATOR',
+'5B': 'TOGGLE_AVIONICS_MASTER',
 '60': 'PARKING_BRAKES',
 '61': 'PARKING_BRAKES',
-'70': 'TOGGLE_NAV_LIGHTS',
-'71': 'TOGGLE_NAV_LIGHTS',
-'80': 'TOGGLE_BEACON_LIGHTS',
-'81': 'TOGGLE_BEACON_LIGHTS',
-'90': 'STROBES_OFF',
-'91': 'STROBES_ON',
-'100': 'TOGGLE_TAXI_LIGHTS',
-'101': 'TOGGLE_TAXI_LIGHTS',
-'110': 'LANDING_LIGHTS_OFF',
-'111': 'LANDING_LIGHTS_ON',
-'120': 'PITOT_HEAT_TOGGLE',
-'121': 'PITOT_HEAT_TOGGLE',
-'13B': 'AP_MASTER',
-'14B': 'AP_APR_HOLD',
+'7B': 'TOGGLE_BEACON_LIGHTS',
+'8B': 'STROBES_TOGGLE',
+'9B': 'TOGGLE_TAXI_LIGHTS',
+'10B': 'LANDING_LIGHTS_TOGGLE',
+'11B': 'AP_APR_HOLD',
+'12B': 'AP_MASTER',
+'13B': 'TOGGLE_NAV_LIGHTS',
+'14B': 'PITOT_HEAT_TOGGLE',
 '150': 'GEAR_DOWN',
 '151': 'GEAR_UP',
 '19B': 'FLAPS_DECR',
@@ -64,11 +32,18 @@ bindings = {
 'V+': 'AP_VS_VAR_INC',
 'V-': 'AP_VS_VAR_DEC',
 'VB': 'AP_VS_VAR_SET_ENGLISH',
-'NB': 'AP_NAV1_HOLD_ON',
+#'NB': 'AP_NAV1_HOLD_ON',
 'B+': 'KOHLSMAN_INC',
 'B-': 'KOHLSMAN_DEC',
-'BB': 'BARO_STD', #No such event. Simcontrol.py scenario
+'BB': '@BARO_STD', #scenario
 'E+': 'ELEV_TRIM_DN',
 'E-': 'ELEV_TRIM_UP'
 }
+
+#SCENARIOS:
+scenarios = [
+    {"name":"@BARO_STD", "id": "KOHLSMAN_SET", "value": 1013}
+
+]
+
 
