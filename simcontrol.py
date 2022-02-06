@@ -33,21 +33,24 @@ class Simcontrol:
                 self.mobiflight_event(key)
             except:
                 print ("Error while executing MobiFlight event")
-            pass
+            return
 
         #If binding contains scenario marker "@" in it.
         if "@" in key:
             try:
                 self.event(self.scenarios_search(key, "id"), self.scenarios_search(key, "value"), True)
             except:
-                print ("Error while executing scenario")
-            pass
+                print ("Error while executing @ scenario")
+            return
 
         #If binding contains multidata marker ":" in it. E.g. potentiometer data THROTTLE:998 splits for "THROTTLE" binding and value 998
         if ":" in key:
-            a = key.split(":")
-            self.event(bindings.bindings[a[0]], a[1], True)
-            pass
+            try:
+                a = key.split(":")
+                self.event(bindings.bindings[a[0]], int(a[1]), True)
+            except:
+                print ("Error while executing : scenario")
+            return
 
         try:
             self.event(key)
