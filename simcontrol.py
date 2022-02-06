@@ -11,7 +11,8 @@ class Simcontrol:
     def quit_connect(self):
         self.sm.exit()
 
-    def scenarios_search(name, value):
+
+    def scenarios_search(self, name, value):
         try:
             find_scenario = next(item for item in bindings.scenarios if item["name"] == str(name))
             return find_scenario[value]
@@ -20,11 +21,13 @@ class Simcontrol:
 
     
     def input_distributor(self, key):
+        #Getting a binding if simple data recieved. e.g. "24B" from pyFlightBox search for binding named "24B" in bindings.py.
         try:
             key = bindings.bindings[key]
         except:
-            None
+            None #If there is no binding (like potentiometers data %POT_NAME%:%value%)-> input data transmitting below.
 
+        #If binding contains "MobiFlight" in it.
         if 'MobiFlight' in key:
             try:
                 self.mobiflight_event(key)
@@ -32,11 +35,18 @@ class Simcontrol:
                 print ("Error while executing MobiFlight event")
             pass
 
+        #If binding contains scenario marker "@" in it.
         if "@" in key:
             try:
-                self.event(key, self.scenarios_search(key, "id"), self.scenarios_search(key, "value"), True)
+                self.event(self.scenarios_search(key, "id"), self.scenarios_search(key, "value"), True)
             except:
                 print ("Error while executing scenario")
+            pass
+
+        #If binding contains multidata marker ":" in it. E.g. potentiometer data THROTTLE:998 splits for "THROTTLE" binding and value 998
+        if ":" in key:
+            a = key.split(":")
+            self.event(bindings.bindings[a[0]], a[1], True)
             pass
 
         try:
@@ -45,12 +55,13 @@ class Simcontrol:
             print ("Error while executing event")
 
         
-    def event(self, key, ID=None, value=None, isscenario=False):
+    def event(self, ID, value=None, isscenario=False):
+
         if isscenario:
             trigger = self.ae.find(ID)
             trigger(value)
         else:
-            trigger = self.ae.find(key)
+            trigger = self.ae.find(ID)
             trigger()
 
 
@@ -58,7 +69,7 @@ class Simcontrol:
         return self.aq.get(key)
 
     
-    def mobiflight_event(self, key):
-        key = key.encode('utf-8')
-        mbfl_trigger = Event(key, self.sm)
+    def mobiflight_event(self, ID):
+        ID = ID.encode('utf-8')
+        mbfl_trigger = Event(ID, self.sm)
         mbfl_trigger()
