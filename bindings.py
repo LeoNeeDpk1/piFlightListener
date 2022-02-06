@@ -1,5 +1,5 @@
 # 1 = ON, 0 = OFF, B = Button (state is not needed).
-# Example: 60 = Parking breaks on, 151 = Landing gear up.
+# Example: 60 = pin 6 off, 151 = pin 15 on.
 # Check your piFlightBox configuration.
 
 
@@ -37,7 +37,12 @@ bindings = {
 'B-': 'KOHLSMAN_DEC',
 'BB': '@BARO_STD', #scenario
 'E+': 'ELEV_TRIM_DN',
-'E-': 'ELEV_TRIM_UP'
+'E-': 'ELEV_TRIM_UP',
+
+#Potentiometer names from piFlightBox config.py
+'THROTTLE': 'THROTTLE_SET',
+'MIXTURE': 'MIXTURE_SET',
+
 }
 
 #SCENARIOS:
