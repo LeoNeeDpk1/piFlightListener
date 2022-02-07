@@ -1,6 +1,8 @@
 
 SimConnect.cfg
 .gitignore
+__pycache__/*
+__pycache__/
 __pycache__/bindings.cpython-38.pyc
 __pycache__/simcontrol.cpython-38.pyc
 __pycache__/bindings.cpython-39.pyc
